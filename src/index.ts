@@ -9,13 +9,9 @@ const app: Express = express();
 app.use(express.json());
 app.use(cors());
 
-app.get("/test", async (req: Request, res: Response) => {
-  res.json({ message: "hello" });
-});
-
 app.use("/api", rootRouter);
 app.use(errorMiddleware);
 
 app.listen(PORT, () => {
-  console.log("Server Started: 7000");
+  console.log(`Server Started: ${PORT}`);
 });
