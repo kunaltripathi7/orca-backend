@@ -53,7 +53,7 @@ model Member {
   role MemberRole @default(GUEST)
   profileId String
   profile Profile @relation(fields: [profileId], references: [id], onDelete: Cascade)
-  serverId String
+  serverId String // delete a member X || delete a server - cascade
   server Server @relation(fields: [serverId], references: [id], onDelete: Cascade)
 
   messages Message[]

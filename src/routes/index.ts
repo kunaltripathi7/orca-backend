@@ -4,6 +4,8 @@ import serverRoutes from "./server";
 import { ClerkExpressRequireAuth, StrictAuthProp } from "@clerk/clerk-sdk-node";
 import { v2 as cloudinary } from "cloudinary";
 import { CLOUD_API_KEY, CLOUD_API_SECRET, CLOUD_NAME } from "../secrets";
+import memberRoutes from "./member";
+import channelRoutes from "./channel";
 
 declare global {
   namespace Express {
@@ -22,5 +24,7 @@ const rootRouter: Router = Router();
 rootRouter.use(ClerkExpressRequireAuth());
 rootRouter.use("/user", authRoutes);
 rootRouter.use("/server", serverRoutes);
+rootRouter.use("/member", memberRoutes);
+rootRouter.use("/channel", channelRoutes);
 
 export default rootRouter;

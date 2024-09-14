@@ -2,7 +2,13 @@ import { Router } from "express";
 import { errorHandler } from "../errorHandler";
 import {
   createUserServer,
-  getUserServer,
+  deleteServer,
+  getCurrentServer,
+  getInviteServer,
+  getUserServers,
+  leaveServer,
+  updateInviteCode,
+  updateServer,
 } from "../controllers/serverController";
 import multer from "multer";
 import { validateServerRequest } from "../middlewares/validate";
@@ -17,12 +23,19 @@ const upload = multer({
   },
 });
 
-serverRoutes.get("/:userId", errorHandler(getUserServer));
+serverRoutes.get("/invite/:inviteCode", errorHandler(getInviteServer));
+serverRoutes.get("/by-id/:serverId", errorHandler(getCurrentServer));
+serverRoutes.get("/", errorHandler(getUserServers));
+
 serverRoutes.post(
   "/:userId",
   upload.single("imageFile"),
   validateServerRequest,
   errorHandler(createUserServer)
 );
+serverRoutes.patch("/:serverId/invite-code", errorHandler(updateInviteCode));
+serverRoutes.patch("/:serverId/leave", errorHandler(leaveServer));
+serverRoutes.patch("/:serverId", errorHandler(updateServer));
 
+serverRoutes.delete("/:serverId", errorHandler(deleteServer));
 export default serverRoutes;

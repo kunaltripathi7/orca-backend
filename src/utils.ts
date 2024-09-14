@@ -1,5 +1,7 @@
-import { Request } from "express";
+import { NextFunction, Request } from "express";
 import { db } from "./clients/prismaClient";
+import { NotFoundException } from "./exceptions/not-found";
+import { ErrorCode } from "./exceptions/root";
 
 export const currentProfile = async (req: Request) => {
   const { userId } = req.auth;
@@ -9,5 +11,6 @@ export const currentProfile = async (req: Request) => {
       userId,
     },
   });
+
   return profile;
 };
