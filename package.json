@@ -5,7 +5,7 @@
   "main": "./src/index.ts",
   "scripts": {
     "dev": "npx nodemon",
-    "build": "tsc"
+    "build": "npm install && npx tsc"
   },
   "keywords": [],
   "author": "",
