@@ -23,8 +23,8 @@ const rootRouter: Router = Router();
 
 rootRouter.use(ClerkExpressRequireAuth());
 rootRouter.use("/user", authRoutes);
-rootRouter.use("/server", serverRoutes);
+rootRouter.use("/servers", serverRoutes);
 rootRouter.use("/member", memberRoutes);
-rootRouter.use("/channel", channelRoutes);
+rootRouter.use("/channels", channelRoutes);
 
 export default rootRouter;
