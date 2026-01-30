@@ -224,12 +224,20 @@ export const getChannel = async (
     },
   });
 
+  // author
   const member = await db.member.findFirst({
     where: {
       serverId: serverId,
       profileId: profile.id,
     },
   });
+  if (!channel || !member)
+    return next(
+      new NotFoundException(
+        "Can't find the requested channel",
+        ErrorCode.USER_NOT_FOUND
+      )
+    );
 
   res.json(channel);
 };

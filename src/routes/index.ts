@@ -6,10 +6,13 @@ import { v2 as cloudinary } from "cloudinary";
 import { CLOUD_API_KEY, CLOUD_API_SECRET, CLOUD_NAME } from "../secrets";
 import memberRoutes from "./member";
 import channelRoutes from "./channel";
+import messageRoutes from "./message";
+import conversationRoutes from "./conversation";
+import uploadRoutes from "./upload";
 
 declare global {
   namespace Express {
-    interface Request extends StrictAuthProp {}
+    interface Request extends StrictAuthProp { }
   }
 }
 
@@ -26,5 +29,11 @@ rootRouter.use("/user", authRoutes);
 rootRouter.use("/servers", serverRoutes);
 rootRouter.use("/member", memberRoutes);
 rootRouter.use("/channels", channelRoutes);
+rootRouter.use("/messages", messageRoutes);
+rootRouter.use("/conversations", conversationRoutes);
+rootRouter.use("/upload", uploadRoutes);
 
 export default rootRouter;
+
+
+

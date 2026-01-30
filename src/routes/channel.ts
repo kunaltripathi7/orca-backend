@@ -4,6 +4,7 @@ import {
   createChannel,
   deleteChannel,
   editChannel,
+  getChannel,
 } from "../controllers/channelController";
 import multer from "multer";
 
