@@ -39,16 +39,9 @@ export const createUserServer = async (
 ) => {
   const { userId } = req.params;
   const { name } = req.body;
-  if (!req.file)
-    next(
-      new UnprocessbleEntity(
-        new Error(),
-        "User not Found",
-        ErrorCode.UNPROCESSABLE_ENTITY
-      )
-    );
-
-  const imageUrl = await uploadImage(req.file as Express.Multer.File);
+  const imageUrl = req.file
+    ? await uploadImage(req.file as Express.Multer.File)
+    : "https://cdn.discordapp.com/embed/avatars/0.png";
   const newServer = await db.server.create({
     data: {
       profileId: userId,
@@ -69,7 +62,7 @@ export const createUserServer = async (
 const uploadImage = async (file: Express.Multer.File) => {
   const image = file;
   //cloudinary method to upload as base64 string
-  const base64Image = Buffer.from(image.buffer).toString("base64");
+  const base64Image = image.buffer.toString("base64");
   const dataURI = `data:${image.mimetype};base64,${base64Image}`;
   const uploadResponse = await cloudinary.v2.uploader.upload(dataURI);
   return uploadResponse.url;
